@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ interface MeetingModalProps {
   handleClick?: () => void;
   children?: ReactNode;
   image?: string;
-  buttonIcon?: string;
+  buttonIcon?: string | ReactElement;
 }
 const MeetingModal = ({
   isOpen,
@@ -37,25 +37,22 @@ const MeetingModal = ({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-          </DialogHeader>
-          {image && <Image src={image} alt="Image" width={72} height={72} />}
-          {children}
-          <DialogFooter>
-            <Button onClick={handleClick}>
+        <DialogContent className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
+            {image && (
+              <div className="flex justify-center">
+                <Image src={image} alt="Image" width={72} height={72} />
+              </div>
+            )}
+            <h1 className={cn("text-3xl font-bold leading-[42px]", className)}>
+              {title}
+            </h1>
+            {children}
+            <Button onClick={handleClick} className="gap-1 w-full">
               {buttonText || "Schedule Meeting"}
-              {buttonIcon && (
-                <Image
-                  src={buttonIcon}
-                  alt="Button Icon"
-                  width={13}
-                  height={13}
-                />
-              )}
+              {buttonIcon && buttonIcon}
             </Button>
-          </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     </>

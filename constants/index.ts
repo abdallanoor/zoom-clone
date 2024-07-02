@@ -1,28 +1,36 @@
+import {
+  Home,
+  CalendarClock,
+  CalendarCheck,
+  Video,
+  CircleUser,
+} from "lucide-react";
+
 export const navLinks = [
   {
     lable: "Home",
     route: "/",
-    imgUrl: "/icons/Home.svg",
+    icon: Home,
   },
   {
     lable: "Upcoming",
     route: "/upcoming",
-    imgUrl: "/icons/upcoming.svg",
+    icon: CalendarClock,
   },
   {
     lable: "Previous",
     route: "/previous",
-    imgUrl: "/icons/previous.svg",
+    icon: CalendarCheck,
   },
   {
     lable: "Recordings",
     route: "/recordings",
-    imgUrl: "/icons/Video.svg",
+    icon: Video,
   },
   {
     lable: "Personal Room",
     route: "/personal-room",
-    imgUrl: "/icons/add-personal.svg",
+    icon: CircleUser,
   },
 ];
 

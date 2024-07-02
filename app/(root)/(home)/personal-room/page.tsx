@@ -15,7 +15,7 @@ const Table = ({
   description: string;
 }) => (
   <div className="flex flex-col items-start gap-2 xl:flex-row">
-    <h1 className="font-medium text-primary/80 lg:text-xl xl:min-w-32">
+    <h1 className="font-medium text-primary/70 lg:text-xl xl:min-w-32">
       {title}:
     </h1>
     <h1 className="truncate text-start font-bold max-sm:max-w-[320px] w-full lg:text-xl">

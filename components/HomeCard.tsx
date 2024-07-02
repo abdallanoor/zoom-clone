@@ -22,12 +22,12 @@ const HomeCard = ({
       )}
       onClick={handleClick}
     >
-      <div className="flex-center glassmorphism size-12 rounded-md">
+      <div className="flex-center bg-muted size-12 rounded-md">
         <Image src={img} alt={title} width={27} height={27} />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold">{title}</h1>
-        <p className="text-lg">{description}</p>
+        <p className="text-primary/70">{description}</p>
       </div>
     </div>
   );

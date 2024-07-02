@@ -5,7 +5,7 @@ import { useGetCalls } from "@/hooks/useGetCalls";
 import { Call, CallRecording } from "@stream-io/video-react-sdk";
 import { useEffect, useState } from "react";
 import MeetingCard from "./MeetingCard";
-import { Play } from "lucide-react";
+import { CalendarCheck, CalendarClock, Play, Video } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Loader from "./Loader";
 import { toast } from "./ui/use-toast";
@@ -69,50 +69,44 @@ const CallList = ({ type }: { type: "ended" | "upcoming" | "recording" }) => {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
       {calls && calls.length > 0 ? (
-        calls.map((meeting: Call | CallRecording) => (
-          <>
-            <MeetingCard
-              key={(meeting as Call).id}
-              title={
-                (meeting as Call).state?.custom?.description?.substring(
-                  0,
-                  26
-                ) ||
-                meeting?.filename?.substring(0, 20) ||
-                "Personal Meeting"
-              }
-              date={
-                meeting.state?.startsAt.toLocaleString() ||
-                meeting.state?.start_time.toLocaleString()
-              }
-              icon={
-                type === "ended"
-                  ? "/icons/previous.svg"
-                  : type === "upcoming"
-                  ? "/icons/upcoming.svg"
-                  : "/icons/recordings.svg"
-              }
-              link={
-                type === "recording"
-                  ? meeting.url
-                  : `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meeting.id}`
-              }
-              buttonIcon1={
-                type === "recording" ? <Play size={15} /> : undefined
-              }
-              buttonText={type === "recording" ? "Play" : "Start"}
-              handleClick={
-                type === "recording"
-                  ? () => router.push(`${meeting.url}`)
-                  : () => router.push(`/meeting/${meeting.id}`)
-              }
-              isPreviousMeeting={type === "ended"}
-            />
-          </>
+        calls.map((meeting: Call | CallRecording, index: number) => (
+          <MeetingCard
+            key={meeting.id ?? index} // Use index as fallback if id is not available
+            title={
+              (meeting as Call).state?.custom?.description?.substring(0, 26) ||
+              meeting?.filename?.substring(0, 20) ||
+              "Personal Meeting"
+            }
+            date={
+              meeting.state?.startsAt.toLocaleString() ||
+              meeting.state?.start_time.toLocaleString()
+            }
+            icon={
+              type === "ended" ? (
+                <CalendarCheck size={30} />
+              ) : type === "upcoming" ? (
+                <CalendarClock size={30} />
+              ) : (
+                <Video size={30} />
+              )
+            }
+            link={
+              type === "recording"
+                ? meeting.url
+                : `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meeting.id}`
+            }
+            buttonIcon1={type === "recording" ? <Play size={15} /> : undefined}
+            buttonText={type === "recording" ? "Play" : "Start"}
+            handleClick={
+              type === "recording"
+                ? () => router.push(`${meeting.url}`)
+                : () => router.push(`/meeting/${meeting.id}`)
+            }
+            isPreviousMeeting={type === "ended"}
+          />
         ))
       ) : (
         <h1>{noCallsMessage}</h1>
-        // <MeetingCard  />
       )}
     </div>
   );

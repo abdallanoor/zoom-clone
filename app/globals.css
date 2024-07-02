@@ -104,7 +104,7 @@
 /* =============================== */
 
 .scroll::-webkit-scrollbar {
-  @apply bg-transparent w-[8px] ;
+  @apply bg-transparent w-[6px] ;
 }
 
 .scroll::-webkit-scrollbar-track {
@@ -112,7 +112,7 @@
 }
 
 .scroll::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground/50 active:bg-muted-foreground/80 rounded;
+  @apply bg-muted-foreground/50 active:bg-muted-foreground/80 rounded-[1px];
 }
 
 body::-webkit-scrollbar{

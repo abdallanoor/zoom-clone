@@ -3,9 +3,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { navLinks } from "@/constants";
@@ -30,15 +27,8 @@ const MobileNav = () => {
         </SheetTrigger>
         <SheetContent side="left" className="bg-dark-1 border-none">
           <SheetClose asChild>
-            <Link href="/" className="flex items-center gap-1">
-              <Image
-                src="/icons/logo.svg"
-                alt="yoom logo"
-                width={32}
-                height={32}
-                className="max-sm:size-10"
-              />
-              <p className="text-[26px] font-extrabold">YOOM</p>
+            <Link href="/">
+              <Image src="/images/logo.svg" alt="logo" width={90} height={90} />
             </Link>
           </SheetClose>
           <div className="flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto">
@@ -52,19 +42,14 @@ const MobileNav = () => {
                     <Link
                       href={link.route}
                       className={cn(
-                        "flex items-center gap-4 rounded-lg p-4 w-full max-w-60",
+                        "flex items-center gap-2 rounded-lg p-4 w-full max-w-60 opacity-60",
                         {
-                          "bg-blue-1": isActive,
+                          "bg-dark-2 opacity-100": isActive,
                         }
                       )}
                     >
-                      <Image
-                        src={link.imgUrl}
-                        alt={link.lable}
-                        width={20}
-                        height={20}
-                      />
-                      <p className="font-semibold">{link.lable}</p>
+                      <link.icon className="w-5 h-5" />
+                      <p>{link.lable}</p>
                     </Link>
                   </SheetClose>
                 );

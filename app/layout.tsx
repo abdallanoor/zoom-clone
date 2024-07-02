@@ -11,7 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Yoom",
+  title: "Zoom Clone",
   description: "Video calling app",
   icons: {
     icon: "/icons/logo.svg",
@@ -29,8 +29,7 @@ export default function RootLayout({
         appearance={{
           baseTheme: dark,
           layout: {
-            logoImageUrl: "/icons/yoom-logo.svg",
-            // socialButtonsVariant: "iconButton",
+            logoImageUrl: "/images/logo.svg",
           },
         }}
       >

@@ -2,14 +2,14 @@ import { avatarImages } from "@/constants";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { Copy, Play, Share, SquareArrowOutUpRight } from "lucide-react";
+import { Copy } from "lucide-react";
 import { ReactElement } from "react";
 import { toast } from "./ui/use-toast";
 
 interface MeetingCardProps {
   title: string;
   date: string;
-  icon: string;
+  icon: string | ReactElement;
   isPreviousMeeting?: boolean;
   buttonIcon1?: string | ReactElement;
   buttonText?: string;
@@ -28,11 +28,11 @@ const MeetingCard = ({
   isPreviousMeeting,
 }: MeetingCardProps) => {
   return (
-    <section className="flex flex-col bg-dark-1 w-full justify-between rounded-md px-5 py-8 min-h-[258px] xl:max-w-[568px]">
+    <section className="flex flex-col bg-dark-1 w-full justify-between rounded-md gap-10 px-5 py-8 min-h-[250px] xl:max-w-[568px]">
       <article className="flex flex-col gap-3">
-        <Image src={icon} alt="upcoming" width={28} height={28} />
+        {icon}
         <h3 className="text-2xl font-semibold">{title}</h3>
-        <p className="text-sm text-gray-400">{date}</p>
+        <p className="text-sm text-primary/70">{date}</p>
       </article>
       <article className={cn("flex justify-center relative", {})}>
         <div className="relative flex w-full max-sm:hidden">
@@ -54,14 +54,14 @@ const MeetingCard = ({
           </div>
         </div>
         {!isPreviousMeeting && (
-          <div className="flex gap-2">
-            <Button className="gap-1" onClick={handleClick}>
+          <div className="flex gap-2 max-sm:w-full">
+            <Button className="gap-1 max-sm:w-full" onClick={handleClick}>
               {buttonIcon1 && buttonIcon1}
               {buttonText}
             </Button>
             <Button
               variant="secondary"
-              className="gap-1"
+              className="gap-1 max-sm:w-full"
               onClick={() => {
                 navigator.clipboard.writeText(link);
                 toast({

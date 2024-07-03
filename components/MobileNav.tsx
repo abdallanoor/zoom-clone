@@ -42,7 +42,7 @@ const MobileNav = () => {
                     <Link
                       href={link.route}
                       className={cn(
-                        "flex items-center gap-2 rounded-lg p-4 w-full max-w-60 opacity-60",
+                        "flex items-center gap-2 rounded-lg p-4 w-full max-w-60 opacity-50",
                         {
                           "bg-dark-2 opacity-100": isActive,
                         }

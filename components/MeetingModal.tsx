@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Loader2 } from "lucide-react";
 
 interface MeetingModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface MeetingModalProps {
   children?: ReactNode;
   image?: string;
   buttonIcon?: string | ReactElement;
+  loading?: boolean;
 }
 const MeetingModal = ({
   isOpen,
@@ -25,6 +27,7 @@ const MeetingModal = ({
   children,
   image,
   buttonIcon,
+  loading,
 }: MeetingModalProps) => {
   return (
     <>
@@ -45,7 +48,12 @@ const MeetingModal = ({
               {title}
             </DialogTitle>
             {children}
-            <Button onClick={handleClick} className="gap-1 w-full">
+            <Button
+              onClick={handleClick}
+              className="gap-1 w-full"
+              disabled={loading}
+            >
+              {loading && <Loader2 className="h-4 w-4 animate-spin" />}
               {buttonIcon && buttonIcon}
               {buttonText || "Schedule Meeting"}
             </Button>

@@ -4,8 +4,9 @@ import { toast } from "@/components/ui/use-toast";
 import { useGetCallById } from "@/hooks/useGetCallById";
 import { useUser } from "@clerk/nextjs";
 import { useStreamVideoClient } from "@stream-io/video-react-sdk";
-import { Copy } from "lucide-react";
+import { Copy, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Table = ({
   title,
@@ -30,10 +31,12 @@ const PersonalRoom = () => {
   const { call } = useGetCallById(meetingId!);
   const client = useStreamVideoClient();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const startMeeting = async () => {
     if (!client || !user) return;
     if (!call) {
+      setIsLoading(true);
       const newCall = client.call("default", meetingId!);
 
       await newCall.getOrCreate({
@@ -41,6 +44,7 @@ const PersonalRoom = () => {
           starts_at: new Date().toISOString(),
         },
       });
+      setIsLoading(false);
     }
     router.push(`/meeting/${meetingId}?personal=true`);
   };
@@ -59,7 +63,10 @@ const PersonalRoom = () => {
         <Table title="Invite Link" description={meetingLink} />
       </div>
       <div className="flex gap-5">
-        <Button onClick={startMeeting}>Start Meeting</Button>
+        <Button className="gap-1" onClick={startMeeting} disabled={isLoading}>
+          {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+          Start Meeting
+        </Button>
         <Button
           variant="secondary"
           onClick={() => {

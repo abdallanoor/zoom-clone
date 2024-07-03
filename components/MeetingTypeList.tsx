@@ -21,6 +21,7 @@ const MeetingTypeList = () => {
     link: "",
   });
   const [callDetails, setCallDetails] = useState<Call>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useUser();
   const client = useStreamVideoClient();
@@ -34,6 +35,7 @@ const MeetingTypeList = () => {
         toast({ title: "Please select a date and time" });
         return;
       }
+      setIsLoading(true);
       const id = crypto.randomUUID();
       const call = client.call("default", id);
       if (!call) throw new Error("Failed to create meeting");
@@ -58,6 +60,8 @@ const MeetingTypeList = () => {
     } catch (error) {
       console.error(error);
       toast({ title: "Failed to create Meeting" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -100,6 +104,7 @@ const MeetingTypeList = () => {
           onClose={() => setMeetingState(undefined)}
           title="Create Meeting"
           handleClick={createMeeting}
+          loading={isLoading}
         >
           <div className="flex flex-col gap-2.5">
             <label className="text-sm">Add a description</label>
@@ -151,6 +156,7 @@ const MeetingTypeList = () => {
         buttonText="Start Meeting"
         className="text-center"
         handleClick={createMeeting}
+        loading={isLoading}
       />
 
       <MeetingModal

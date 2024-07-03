@@ -19,7 +19,7 @@ const Sidebar = () => {
               href={link.route}
               key={link.lable}
               className={cn(
-                "flex items-center justify-start gap-2 rounded-lg p-4 lg:p-3 hover:bg-dark-2 transition-opacity opacity-60 hover:opacity-100",
+                "flex items-center justify-start gap-2 rounded-lg p-4 lg:p-3 hover:bg-dark-2 transition-opacity opacity-50 hover:opacity-100",
                 {
                   "bg-dark-2 opacity-100": isActive,
                 }

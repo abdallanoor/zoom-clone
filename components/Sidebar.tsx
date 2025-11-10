@@ -9,7 +9,7 @@ import Image from "next/image";
 const Sidebar = () => {
   const pathname = usePathname();
   return (
-    <section className="sticky top-0 left-0 flex w-fit h-[calc(100vh-72px)] flex-col justify-between bg-dark-1 p-5 pt-10 max-sm:hidden lg:w-[264px] scroll overflow-auto">
+    <section className="sticky top-0 left-0 flex w-fit h-[calc(100vh-72px)] flex-col justify-between bg-dark-1 p-5 pt-0 max-sm:hidden lg:w-[264px] scroll overflow-auto">
       <div className="flex flex-1 flex-col gap-2">
         {navLinks.map((link) => {
           const isActive =
